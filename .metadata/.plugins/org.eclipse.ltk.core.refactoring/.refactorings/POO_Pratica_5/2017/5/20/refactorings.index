@@ -1,0 +1,5 @@
+1495044411911	Rename package 'com.pratica.quatro'
+1495044427933	Rename package 'com.pratica.quatro.database'
+1495044626558	Rename field 'salario'
+1495044667365	Rename method 'getSalario'
+1495044751202	Rename method 'setSalario'

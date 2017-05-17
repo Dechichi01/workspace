@@ -1,0 +1,120 @@
+package com.pratica.cinco;
+
+import java.util.Scanner;
+
+public class Aluno extends Pessoa {
+	
+	private String matricula;
+	private Curso curso;
+	private byte situacao;
+	
+	public Aluno(Curso c)
+	{
+		lerDados();
+		if (c != null)
+		{
+			setCurso(c);
+		}
+	}
+	
+	public Aluno()
+	{
+		
+	}
+	
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public boolean setMatricula(String matricula) {
+		if (matricula.length() > 0)
+		{
+			this.matricula = matricula;
+			return true;
+		}
+		
+		System.out.println("Matrícula inválido!");
+		return false;
+	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public boolean setCurso(Curso curso) {
+		if (curso != null)
+		{
+			this.curso = curso;
+			return true;
+		}
+		
+		System.out.println("Curso inválido!");
+		return false;
+	}
+
+	public String getSituacao() {
+		String[] situacaoRespostas= new String[] { 
+				"Não indicado", "Matriculado", "Trancado", "Desligado" };
+		
+		if (situacao > situacaoRespostas.length - 1)
+		{
+			situacao = 0;
+		}
+		
+		return situacaoRespostas[situacao];
+	}
+
+	public boolean setSituacao(char situacao) {
+		char[] situacaoSiglas = new char[] { 'M', 'T', 'D'};
+		this.situacao = 0;
+		for (int i = 0; i < situacaoSiglas.length; i++)
+		{
+			if (situacaoSiglas[i] == situacao)
+			{
+				this.situacao = (byte) (i+1);
+				return true;
+			}
+		}
+		
+		System.out.println("Situação inválida. Favor enviar 'M', 'T' ou 'D'.");
+		return false;
+	}
+	
+	public boolean setSituacao(String situacao)
+	{
+		if (situacao.length() == 0)
+		{
+			return false;
+		}
+		
+		return setSituacao(situacao.charAt(0));
+	}
+
+	public void lerDados()
+	{		
+		super.lerDados();
+		
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("Digite a matrícula do aluno: ");
+		while(!setMatricula(s.nextLine()));
+		
+		System.out.println("Digite a situação do aluno ('M', 'T' ou 'D'): ");
+		while(!setSituacao(s.nextLine()));	
+	}
+	
+	public void mostrarDados()
+	{
+		super.mostrarDados();
+		
+		String resposta = String.format(
+				"Matricula: %1s\n"
+				+ "Situação: %2s\n"
+				+ "\nCurso:", 
+				getMatricula(), getSituacao());
+		
+		System.out.println(resposta);
+		curso.mostrarDados();
+	}
+	
+}
