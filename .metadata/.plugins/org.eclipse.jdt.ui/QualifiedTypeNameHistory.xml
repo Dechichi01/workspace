@@ -2,12 +2,15 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="com.pratica.dois.AlunoPosGraduacao"/>
 <fullyQualifiedTypeName name="com.pratica.util.Verificador"/>
 <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.pratica.quatro.Aluno"/>
 <fullyQualifiedTypeName name="com.pratica.quatro.database.DadosAlunos"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.pratica.seis.classes.Funcionario"/>
+<fullyQualifiedTypeName name="com.pratica.seis.classes.FolhaPagamento"/>
+<fullyQualifiedTypeName name="com.pratica.seis.classes.Vigilante"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

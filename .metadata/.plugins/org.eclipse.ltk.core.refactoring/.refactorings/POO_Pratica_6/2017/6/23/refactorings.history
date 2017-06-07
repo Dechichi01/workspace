@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 4 packages to &apos;POO_Pratica_7/src&apos;&#x0D;&#x0A;- Original project: &apos;POO_Pratica_6&apos;&#x0D;&#x0A;- Destination element: &apos;POO_Pratica_7/src&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     POO_Pratica_6/src/com.pratica.seis.database&#x0D;&#x0A;     POO_Pratica_6/src/com.pratica.seis.classes&#x0D;&#x0A;     POO_Pratica_6/src/com.pratica.util&#x0D;&#x0A;     POO_Pratica_6/src/com.pratica.seis" description="Copy packages" destination="=POO_Pratica_7/src" element1="/src&lt;com.pratica.seis.database" element2="/src&lt;com.pratica.seis.classes" element3="/src&lt;com.pratica.util" element4="/src&lt;com.pratica.seis" flags="589830" fragments="4" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1496874442054" version="1.0"/>
+</session>
