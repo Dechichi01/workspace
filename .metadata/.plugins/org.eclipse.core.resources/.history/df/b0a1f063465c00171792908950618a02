@@ -1,0 +1,179 @@
+package com.pratica.oito.classes;
+
+import java.sql.Date;
+import java.util.Scanner;
+
+import com.pratica.util.exceptions.SetInvalido;
+
+public class AlunoPosGraduacao extends Aluno {
+	
+	private String graduacao;
+	private String instituicao;
+	private Curso cursoPos;
+	private Date inicioGraduacao;
+	private Date fimGraduacao;
+	
+	public AlunoPosGraduacao()
+	{
+		super();
+		while (true)
+		{
+			try 
+			{
+				setCursoPos(new Curso());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e.getMessage());
+				System.out.println("Tente novamente...");
+			}
+		}
+	}
+	
+	public AlunoPosGraduacao(Curso curso, Curso cursoPos)
+	{
+		super(curso);
+		while (true)
+		{
+			try 
+			{
+				setCursoPos(cursoPos);
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e.getMessage());
+				System.out.println("Tente novamente...");
+			}
+		}
+	}
+	
+	public String getGraduacao() {
+		return graduacao;
+	}
+
+	public void setGraduacao(String graduacao) throws SetInvalido{
+		if (graduacao.equals("") )
+			 throw new SetInvalido("Graduação");
+		else
+			 this.graduacao = graduacao;	
+	}
+
+	public String getInstituicao() {
+		return instituicao;
+	}
+
+	public void setInstituicao(String instituicao) throws SetInvalido {
+		if (instituicao.equals("") )
+			 throw new SetInvalido("Instituição");
+		else
+			 this.instituicao = instituicao;	
+	}
+
+	public Curso getCursoPos() {
+		return cursoPos;
+	}
+
+	public void setCursoPos(Curso cursoPos) throws SetInvalido {
+		if (cursoPos == null)
+			 throw new SetInvalido("Curso Pós");
+		else
+			 this.cursoPos = cursoPos;	
+	}
+
+	public Date getInicioGraduacao() {
+		return inicioGraduacao;
+	}
+
+	public void setInicioGraduacao(String date) throws SetInvalido
+	{
+		setInicioGraduacao(Date.valueOf(date));
+	}
+	
+	public void setInicioGraduacao(Date inicioGraduacao) throws SetInvalido {
+		if (inicioGraduacao == null)
+			 throw new SetInvalido("Data de início graduação");
+		else
+			 this.inicioGraduacao = inicioGraduacao;
+	}
+
+	public Date getFimGraduacao() {
+		return fimGraduacao;
+	}
+
+	public void setFimGraduacao(String date) throws SetInvalido
+	{
+		setFimGraduacao(Date.valueOf(date));
+	}
+	
+	public void setFimGraduacao(Date fimGraduacao) throws SetInvalido {
+		
+		if (fimGraduacao == null)
+			 throw new SetInvalido("Data de fim graduação");
+		else
+			 this.fimGraduacao = fimGraduacao;
+	}
+
+	protected void lerDados()
+	{
+		super.lerDados();
+		
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("Digite a graduação do aluno de pós: ");
+		while (true)
+		{
+			try 
+			{
+				setGraduacao(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e.getMessage());
+				System.out.println("Tente novamente...");
+			}
+		}
+		
+		System.out.println("Digite a instituicao de graduação: ");
+		while (true)
+		{
+			try 
+			{
+				setInstituicao(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e.getMessage());
+				System.out.println("Tente novamente...");
+			}
+		}
+		
+		System.out.println("Digite a data de inicio de graduação (yyyy-mm-dd): ");
+		while(!setInicioGraduacao(Date.valueOf(s.nextLine()) ) );
+		
+		System.out.println("Digite a data de término de graduação (yyyy-mm-dd): ");
+		while(!setFimGraduacao(Date.valueOf(s.nextLine()) ) );	
+	}
+	
+	public void mostrarDados()
+	{
+		super.mostrarDados();
+		
+		String resposta = String.format(
+				"Graduado em: %1s\n"
+				+ "Instituição: %2s\n"
+				+ "Início Graduação: %3s\n"
+				+ "Término Graduação: %4s\n"
+				+ "\nCurso de Pós graduação:", 
+				getGraduacao(), getInstituicao(), getInicioGraduacao(), getFimGraduacao());
+		
+		System.out.println(resposta);
+		if (cursoPos != null)
+		{
+			cursoPos.mostrarDados();	
+		}
+	}
+}

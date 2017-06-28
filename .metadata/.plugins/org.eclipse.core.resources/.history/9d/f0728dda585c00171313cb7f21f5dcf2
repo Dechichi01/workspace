@@ -1,0 +1,53 @@
+package com.pratica.dez.view;
+
+import java.util.Scanner;
+
+import com.pratica.util.exceptions.SetInvalido;
+
+public abstract class VisaoPessoa {
+	
+	protected void lerDados()
+	{		
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("Digite o nome da pessoa: ");
+		while (true)
+		{
+			try 
+			{
+				setNome(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+		}
+		
+		System.out.println("Digite o CPF da pessoa: ");
+		while (true)
+		{
+			try 
+			{
+				setCpf(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+		}	
+	}
+	
+	public void mostrarDados()
+	{
+		String resposta = String.format(
+				"Nome: %1s\n"
+				+ "CPF: %2s\n", 
+				getNome(), getCpf());
+		
+		System.out.println(resposta);
+	}
+}

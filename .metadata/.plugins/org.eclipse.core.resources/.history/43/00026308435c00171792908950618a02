@@ -1,0 +1,120 @@
+package com.pratica.oito.classes;
+
+import java.util.Scanner;
+
+import com.pratica.util.exceptions.SetInvalido;
+
+public class Professor extends Funcionario {
+	
+	private static double valorHoraAula;
+	
+	private String titulacao;
+	private String areaPesquisa;
+	private float valorDedicacaoExclusiva;
+	private float retribTitulacao;
+	
+	public static double getValorHoraAula()
+	{
+		return valorHoraAula;
+	}
+	
+	public static void setValorHoraAula(double valor) throws SetInvalido 
+	{
+		if (valor < 0)
+			 throw new SetInvalido("Valor hora aula");
+		else
+			 this.valor = valor;
+	}
+	
+	public String getTitulacao() {
+		return titulacao;
+	}
+
+	public void setTitulacao(String titulacao) throws SetInvalido {
+		if (titulacao.equals(""))
+			 throw new SetInvalido("Titulação");
+		else
+			 this.titulacao = titulacao;	
+	}
+
+	public String getAreaPesquisa() {
+		return areaPesquisa;
+	}
+
+	public void setAreaPesquisa(String areaPesquisa) throws SetInvalido {
+		if (areaPesquisa.length() > 0)
+		{
+			this.areaPesquisa = areaPesquisa;
+			return true;
+		}
+		
+		System.out.println("Área de pesquisa inválido!");
+		return false;
+	}
+	
+	public float getValorDedicacaoExclusiva() {
+		return valorDedicacaoExclusiva;
+	}
+
+	public void setValorDedicacaoExclusiva(float valorDedicacaoExclusiva) throws SetInvalido {
+		if (valorDedicacaoExclusiva > 0)
+		{
+			this.valorDedicacaoExclusiva = valorDedicacaoExclusiva;
+			return true;
+		}
+		
+		System.out.println("Valor Dedicação Exclusiva inválido!");
+		return false;
+	}
+
+	public float getRetribTitulacao() {
+		return retribTitulacao;
+	}
+
+	public void setRetribTitulacao(float retribTitulacao) throws SetInvalido {
+		if (retribTitulacao > 0)
+		{
+			this.retribTitulacao = retribTitulacao;
+			return true;
+		}
+		
+		System.out.println("Retribuição a titulação inválido!");
+		return false;
+	}
+
+	protected void lerDados()
+	{		
+		super.lerDados();
+		
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("Digite a titulacao do professor: ");
+		while(!setTitulacao(s.nextLine()));
+		
+		System.out.println("Digite a área de pesquisa do professor: ");
+		while(!setAreaPesquisa(s.nextLine()));	
+		
+		System.out.println("Digite o Valor Dedicação Exclusiva do professor: ");
+		while(!setValorDedicacaoExclusiva(s.nextFloat()));	
+		
+		System.out.println("Digite a Retribuição a titulação do professor: ");
+		while(!setRetribTitulacao(s.nextFloat()));	
+	}
+	
+	public void mostrarDados()
+	{
+		super.mostrarDados();
+		
+		String resposta = String.format(
+				"Titulação: %1s\n"
+				+ "Área de pesquisa: %2s\n", 
+				getTitulacao(), getAreaPesquisa());
+		
+		System.out.println(resposta);
+	}
+
+	@Override
+	public double calcSalario() {
+		return super.calcSalario() + getValorDedicacaoExclusiva() + getRetribTitulacao();
+	}
+}

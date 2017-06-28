@@ -1,5 +1,0 @@
-package com.pratica.seis;
-
-public abstract class FolhaPagamento {
-
-}

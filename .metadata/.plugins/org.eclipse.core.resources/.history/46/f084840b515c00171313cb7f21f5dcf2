@@ -1,0 +1,5 @@
+package com.pratica.nove.interfaces;
+
+public interface IPesquisador {
+
+}

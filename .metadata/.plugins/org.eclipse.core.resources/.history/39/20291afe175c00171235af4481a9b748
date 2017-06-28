@@ -1,0 +1,9 @@
+package com.pratica.util.exceptions;
+
+public class SetInvalido extends Exception {
+	
+	public String toString()
+	{
+		
+	}
+}

@@ -1,0 +1,24 @@
+package com.pratica.util;
+
+import java.util.*;
+
+public abstract class EntradaDeDado {
+	
+	public static int lerInteiro()
+	{
+		while (true)
+		{
+			try 
+			{
+				d = s.nextDouble();
+				System.out.println("OK!");
+				break;
+			}
+			catch (InputMismatchException e) 
+			{
+				System.out.println("Erro: "+e.toString());
+				System.out.println("Digite novamente.");
+			}
+		}
+	}
+}

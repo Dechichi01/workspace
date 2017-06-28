@@ -1,0 +1,5 @@
+package com.pratica.dez.view;
+
+public abstract class VisaoCurso {
+
+}

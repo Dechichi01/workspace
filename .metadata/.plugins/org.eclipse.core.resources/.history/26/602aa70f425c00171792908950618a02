@@ -1,0 +1,73 @@
+package com.pratica.oito.classes;
+
+import java.util.Scanner;
+
+import com.pratica.util.Verificador;
+import com.pratica.util.exceptions.SetInvalido;
+
+public class Pessoa {
+	
+	private String nome;
+	private String cpf;
+	
+	public Pessoa()
+	{
+		lerDados();
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) throws SetInvalido{
+		if (nome.equals(""))
+			 throw new SetInvalido("Nome");
+		else
+			 this.nome =nome;
+		
+		if (nome.length() > 0)
+		{
+			this.nome = nome;
+			return true;
+		}
+		
+		System.out.println("Nome inválido!");
+		return false;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) throws SetInvalido{
+		if (Verificador.CPFValido(cpf))
+		{
+			this.cpf = cpf;
+			return true;
+		}
+		
+		System.out.println("CPF inválido!");
+		return false;
+	}
+
+	protected void lerDados()
+	{		
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("Digite o nome da pessoa: ");
+		while(!setNome(s.nextLine()));
+		
+		System.out.println("Digite o CPF da pessoa: ");
+		while(!setCpf(s.nextLine()));	
+	}
+	
+	public void mostrarDados()
+	{
+		String resposta = String.format(
+				"Nome: %1s\n"
+				+ "CPF: %2s\n", 
+				getNome(), getCpf());
+		
+		System.out.println(resposta);
+	}
+}

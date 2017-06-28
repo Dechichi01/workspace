@@ -1,0 +1,5 @@
+package com.pratica.dez.model;
+
+public class Vigilante extends Funcionario {
+	
+}

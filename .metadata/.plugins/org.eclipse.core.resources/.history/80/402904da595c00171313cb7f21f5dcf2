@@ -1,0 +1,59 @@
+package com.pratica.dez.view;
+
+import java.util.Scanner;
+
+import com.pratica.util.exceptions.SetInvalido;
+
+public abstract class VisaoAluno {
+	
+	public static void lerDados()
+	{		
+		super.lerDados();
+		
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("Digite a matrícula do aluno: ");
+		while (true)
+		{
+			try 
+			{
+				setMatricula(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+		}
+		
+		System.out.println("Digite a situação do aluno ('M', 'T' ou 'D'): ");
+		while (true)
+		{
+			try 
+			{
+				setSituacao(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+		}
+	}
+	
+	public void mostrarDados()
+	{
+		super.mostrarDados();
+		
+		String resposta = String.format(
+				"Matricula: %1s\n"
+				+ "Situação: %2s\n"
+				+ "\nCurso:", 
+				getMatricula(), getSituacao());
+		
+		System.out.println(resposta);
+		curso.mostrarDados();
+	}
+}

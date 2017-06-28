@@ -1,0 +1,16 @@
+package com.pratica.nove.classes;
+
+import java.sql.Date;
+import java.util.ArrayList;
+
+import com.pratica.nove.interfaces.IPesquisador;
+
+public class ProjetoPesquisa {
+	private int codigo;
+	private String titulo;
+	private Date dataInicio;
+	private Date dataFim;
+	private Professor profResponsavel;
+	private ArrayList<IPesquisador> pesquisadores =new ArrayList<IPesquisador> ;
+	
+}
