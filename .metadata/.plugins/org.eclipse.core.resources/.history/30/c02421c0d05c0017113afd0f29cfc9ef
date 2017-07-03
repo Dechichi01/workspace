@@ -1,0 +1,90 @@
+package com.pratica.dez.view;
+
+import java.util.Scanner;
+
+import com.pratica.util.exceptions.SetInvalido;
+
+public abstract class VisaoFuncionario {
+
+	public static void lerDados(Funcionario f)
+	{
+		VisaoPessoa.lerDados();
+		
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("Digite o endereço do funcionário: ");
+		while (true)
+		{
+			try 
+			{
+				setEndereco(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+		}
+		
+		System.out.println("Digite o telefone do funcionário: ");
+		while (true)
+		{
+			try 
+			{
+				setTelefone(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+		}
+		
+		System.out.println("Digite o CTPS do funcionário: ");
+		while (true)
+		{
+			try 
+			{
+				setCtps(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+		}
+		
+		System.out.println("Digite o Salário Base do funcionário: ");
+		while (true)
+		{
+			try 
+			{
+				setSalarioBase(s.nextDouble());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+		}
+	}
+	
+	public void mostrarDados()
+	{
+		super.mostrarDados();
+		
+		String resposta = String.format(
+				"Endereço: %1s\n"
+				+ "Telefone: %2s\n"
+				+ "CTPS: %3s\n"
+				+ "Salário: R$%.2f\n", 
+				getEndereco(), getTelefone(), getCtps(), calcSalario());
+		
+		System.out.println(resposta);
+	}
+
+}

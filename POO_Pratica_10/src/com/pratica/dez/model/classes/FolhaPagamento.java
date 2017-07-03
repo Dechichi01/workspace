@@ -2,6 +2,8 @@ package com.pratica.dez.model.classes;
 
 import java.util.ArrayList;
 
+import com.pratica.dez.view.VisaoFuncionario;
+
 public abstract class FolhaPagamento {
 	
 	private static double totalFolha = 0;
@@ -59,7 +61,7 @@ public abstract class FolhaPagamento {
 			double irrf = calcIRRF(f);
 			double inss = calcINSS(f);
 			System.out.printf("##### Funcionario %d (%s): \n", i, f.getClass().getSimpleName());
-			f.mostrarDados();
+			VisaoFuncionario.mostrarDados(f);
 			//System.out.printf("Salário do funcionário: R$%.2f\n",salario);
 			System.out.printf("IRRF a ser pago pelo funcionario: R$%.2f\n", irrf);
 			System.out.printf("INSS a ser pago pelo funcionario: R$%.2f\n", inss);

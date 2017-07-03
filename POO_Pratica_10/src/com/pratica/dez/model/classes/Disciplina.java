@@ -2,6 +2,8 @@ package com.pratica.dez.model.classes;
 
 import java.util.Scanner;
 
+import com.pratica.dez.view.VisaoCurso;
+import com.pratica.dez.view.VisaoDisciplina;
 import com.pratica.util.exceptions.SetInvalido;
 
 public class Disciplina {
@@ -14,7 +16,7 @@ public class Disciplina {
 	
 	public Disciplina(Curso c)
 	{
-		lerDados();
+		VisaoDisciplina.lerDados(this);
 		try 
 		{
 			setCurso(c);
@@ -28,9 +30,9 @@ public class Disciplina {
 	
 	public Disciplina()
 	{
-		lerDados();
+		VisaoDisciplina.lerDados(this);
 		Curso c = new Curso();
-		c.lerDados();
+		VisaoCurso.lerDados(c);
 		try 
 		{
 			setCurso(c);
@@ -95,70 +97,5 @@ public class Disciplina {
 			 throw new SetInvalido("Professor");
 		else
 			 this.professor = professor;
-	}
-
-	protected void lerDados()
-	{		
-		Scanner s = new Scanner(System.in);
-		
-		System.out.println("Digite o nome da disciplina: ");
-		while (true)
-		{
-			try 
-			{
-				setNome(s.nextLine());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}
-		
-		System.out.println("Digite o codigo da disciplina: ");
-		while (true)
-		{
-			try 
-			{
-				setCodigo(s.nextInt());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}
-		
-		System.out.println("Digite a carga horária da disciplina: ");
-		while (true)
-		{
-			try 
-			{
-				setCarga_horaria(carga_horaria);
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}
-	}
-	
-	public void mostrarDados()
-	{
-		String resposta = String.format(
-				"Codigo: %1d\n"
-				+ "Nome: %2s\n"
-				+ "Carga horária: %3d\n"
-				+ "\nCurso: ", 
-				getCodigo(), getNome(), getCarga_horaria());
-		
-		System.out.println(resposta);
-		curso.mostrarDados();
-		System.out.println("\nProfessor: ");
-		professor.mostrarDados();
 	}
 }

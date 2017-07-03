@@ -2,6 +2,8 @@ package com.pratica.dez.model.classes;
 
 import java.util.Scanner;
 
+import com.pratica.dez.view.VisaoFuncionario;
+import com.pratica.dez.view.VisaoTecnico;
 import com.pratica.util.exceptions.SetInvalido;
 
 public class Tecnico extends Funcionario {
@@ -12,6 +14,11 @@ public class Tecnico extends Funcionario {
 	private String departamento;
 	private float auxTransporte;
 	private float auxAlimentacao;
+	
+	public Tecnico()
+	{
+		VisaoTecnico.lerDados(this);
+	}
 	
 	public static double getValorHoraExtra()
 	{
@@ -68,55 +75,6 @@ public class Tecnico extends Funcionario {
 			 throw new SetInvalido("Auxílio Alimentação");
 		else
 			 this.auxAlimentacao = auxAlimentacao;
-	}
-
-	protected void lerDados()
-	{		
-		super.lerDados();
-		
-		Scanner s = new Scanner(System.in);
-		
-		System.out.println("Digite o cargo do técnico: ");
-		while (true)
-		{
-			try 
-			{
-				setCargo(s.nextLine());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}	
-		
-		System.out.println("Digite o departamento do técnico: ");
-		while (true)
-		{
-			try 
-			{
-				setDepartamento(s.nextLine());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}		
-	}
-	
-	public void mostrarDados()
-	{
-		super.mostrarDados();
-		
-		String resposta = String.format(
-				"Cargo: %1s\n"
-				+ "Departamento: %2s\n", 
-				getCargo(), getDepartamento());
-		
-		System.out.println(resposta);
 	}
 
 	@Override

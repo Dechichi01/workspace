@@ -1,7 +1,5 @@
 package com.pratica.dez.model.classes;
 
-import java.util.Scanner;
-
 import com.pratica.dez.model.interfaces.IPesquisador;
 import com.pratica.util.exceptions.SetInvalido;
 

@@ -3,14 +3,28 @@ package com.pratica.dez.database;
 import java.util.ArrayList;
 
 import com.pratica.dez.model.classes.Aluno;
+import com.pratica.dez.view.VisaoAluno;
+import com.pratica.util.persistence.Persist;
 
 public class DadosAlunos {
 	
 	private static ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+	private static String filePath = "alunos.dat";
+	
+	static
+	{
+		alunos = Persist.recuperar(filePath);
+		if (alunos == null)
+		{
+			alunos = new ArrayList<Aluno>();
+			Persist.gravar(alunos, filePath);
+		}
+	}
 	
 	public static void cadastrar(Aluno a) 
 	{
 		alunos.add(a);
+		Persist.gravar(alunos, filePath);
 		System.out.println(String.format(
 				"\nTotal de alunos inseridos: %1s", alunos.size()));
 	}
@@ -19,7 +33,7 @@ public class DadosAlunos {
 	{
 		for (Aluno aluno: alunos) 
 		{
-			aluno.mostrarDados();
+			VisaoAluno.mostrarDados(aluno);
 		}		
 	}
 	
@@ -41,6 +55,7 @@ public class DadosAlunos {
 		if (a != null) 
 		{
 			alunos.remove(a);
+			Persist.gravar(alunos, filePath);
 			return true;
 		}
 		

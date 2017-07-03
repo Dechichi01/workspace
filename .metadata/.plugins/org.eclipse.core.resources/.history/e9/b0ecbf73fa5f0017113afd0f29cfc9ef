@@ -1,0 +1,83 @@
+package com.pratica.dez.model.classes;
+
+import java.util.Scanner;
+
+import com.pratica.dez.model.interfaces.IPesquisador;
+import com.pratica.util.exceptions.SetInvalido;
+
+public class Professor extends Funcionario implements IPesquisador {
+	
+	private static double valorHoraAula;
+	
+	private String titulacao;
+	private String areaPesquisa;
+	private float valorDedicacaoExclusiva;
+	private float retribTitulacao;
+	
+	public static double getValorHoraAula()
+	{
+		return valorHoraAula;
+	}
+	
+	public static void setValorHoraAula(double valor) throws SetInvalido 
+	{
+		if (valor < 0)
+			 throw new SetInvalido("Valor hora aula");
+		else
+			 valorHoraAula = valor;
+	}
+	
+	public String getTitulacao() {
+		return titulacao;
+	}
+
+	public void setTitulacao(String titulacao) throws SetInvalido {
+		if (titulacao.equals(""))
+			 throw new SetInvalido("Titulação");
+		else
+			 this.titulacao = titulacao;	
+	}
+
+	public String getAreaPesquisa() {
+		return areaPesquisa;
+	}
+
+	public void setAreaPesquisa(String areaPesquisa) throws SetInvalido {
+		if (areaPesquisa.equals(""))
+			 throw new SetInvalido("Área de Pesquisa");
+		else
+			 this.areaPesquisa = areaPesquisa;
+	}
+	
+	public float getValorDedicacaoExclusiva() {
+		return valorDedicacaoExclusiva;
+	}
+
+	public void setValorDedicacaoExclusiva(float valorDedicacaoExclusiva) throws SetInvalido {
+		if (valorDedicacaoExclusiva <= 0)
+			 throw new SetInvalido("Valor dedicação exclusiva");
+		else
+			 this.valorDedicacaoExclusiva = valorDedicacaoExclusiva;
+	}
+
+	public float getRetribTitulacao() {
+		return retribTitulacao;
+	}
+
+	public void setRetribTitulacao(float retribTitulacao) throws SetInvalido {
+		if (retribTitulacao <= 0)
+			 throw new SetInvalido("Retribuição a titulação");
+		else
+			 this.retribTitulacao = retribTitulacao;
+	}
+
+	@Override
+	public double calcSalario() {
+		return super.calcSalario() + getValorDedicacaoExclusiva() + getRetribTitulacao();
+	}
+
+	@Override
+	public String getTipo() {
+		return this.getClass().getSimpleName();
+	}
+}

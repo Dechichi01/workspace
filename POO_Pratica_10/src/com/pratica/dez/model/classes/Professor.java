@@ -3,6 +3,7 @@ package com.pratica.dez.model.classes;
 import java.util.Scanner;
 
 import com.pratica.dez.model.interfaces.IPesquisador;
+import com.pratica.dez.view.VisaoProfessor;
 import com.pratica.util.exceptions.SetInvalido;
 
 public class Professor extends Funcionario implements IPesquisador {
@@ -14,6 +15,10 @@ public class Professor extends Funcionario implements IPesquisador {
 	private float valorDedicacaoExclusiva;
 	private float retribTitulacao;
 	
+	public Professor()
+	{
+		VisaoProfessor.lerDados(this);
+	}
 	public static double getValorHoraAula()
 	{
 		return valorHoraAula;
@@ -69,85 +74,6 @@ public class Professor extends Funcionario implements IPesquisador {
 			 throw new SetInvalido("Retribuição a titulação");
 		else
 			 this.retribTitulacao = retribTitulacao;
-	}
-
-	protected void lerDados()
-	{		
-		super.lerDados();
-		
-		Scanner s = new Scanner(System.in);
-		
-		System.out.println("Digite a titulacao do professor: ");
-		while (true)
-		{
-			try 
-			{
-				setTitulacao(s.nextLine());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}
-		
-		System.out.println("Digite a área de pesquisa do professor: ");
-		while (true)
-		{
-			try 
-			{
-				setAreaPesquisa(s.nextLine());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}	
-		
-		System.out.println("Digite o Valor Dedicação Exclusiva do professor: ");
-		while (true)
-		{
-			try 
-			{
-				setValorDedicacaoExclusiva(s.nextFloat());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}
-		
-		System.out.println("Digite a Retribuição a titulação do professor: ");
-		while (true)
-		{
-			try 
-			{
-				setRetribTitulacao(s.nextFloat());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}
-	}
-	
-	public void mostrarDados()
-	{
-		super.mostrarDados();
-		
-		String resposta = String.format(
-				"Titulação: %1s\n"
-				+ "Área de pesquisa: %2s\n", 
-				getTitulacao(), getAreaPesquisa());
-		
-		System.out.println(resposta);
 	}
 
 	@Override

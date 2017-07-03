@@ -40,6 +40,7 @@ public class Main {
 
 		Funcionario.setPercentBonificacao(.3);
 		
+		DadosAlunos.listar();
 		for (int i = 1; i< 2; i++)
 		{
 			System.out.printf("##### Professor %d: \n", i);

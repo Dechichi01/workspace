@@ -8,9 +8,7 @@ import com.pratica.util.exceptions.SetInvalido;
 public abstract class VisaoAluno {
 	
 	public static void lerDados(Aluno a)
-	{		
-		VisaoPessoa.lerDados(a);
-		
+	{				
 		Scanner s = new Scanner(System.in);
 		
 		System.out.println("Digite a matrícula do aluno: ");
@@ -44,7 +42,7 @@ public abstract class VisaoAluno {
 		}
 	}
 	
-	public void mostrarDados(Aluno a)
+	public static void mostrarDados(Aluno a)
 	{
 		VisaoPessoa.mostrarDados(a);
 		
@@ -57,4 +55,5 @@ public abstract class VisaoAluno {
 		System.out.println(resposta);
 		VisaoCurso.mostrarDados(a.getCurso());
 	}
+	
 }

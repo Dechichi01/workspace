@@ -2,6 +2,7 @@ package com.pratica.dez.model.classes;
 
 import java.util.Scanner;
 
+import com.pratica.dez.view.VisaoFuncionario;
 import com.pratica.util.exceptions.SetInvalido;
 
 public abstract class Funcionario extends Pessoa {
@@ -13,6 +14,11 @@ public abstract class Funcionario extends Pessoa {
 	private String telefone;
 	private String ctps;
 	private double salarioBase;
+	
+	public Funcionario()
+	{
+		VisaoFuncionario.lerDados(this);
+	}
 	
 	public double calcSalario()
 	{
@@ -98,86 +104,4 @@ public abstract class Funcionario extends Pessoa {
 		else
 			 this.salarioBase= salario;
 	}
-
-	protected void lerDados()
-	{
-		super.lerDados();
-		
-		Scanner s = new Scanner(System.in);
-		
-		System.out.println("Digite o endereço do funcionário: ");
-		while (true)
-		{
-			try 
-			{
-				setEndereco(s.nextLine());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}
-		
-		System.out.println("Digite o telefone do funcionário: ");
-		while (true)
-		{
-			try 
-			{
-				setTelefone(s.nextLine());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}
-		
-		System.out.println("Digite o CTPS do funcionário: ");
-		while (true)
-		{
-			try 
-			{
-				setCtps(s.nextLine());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}
-		
-		System.out.println("Digite o Salário Base do funcionário: ");
-		while (true)
-		{
-			try 
-			{
-				setSalarioBase(s.nextDouble());
-				break;
-			} 
-			catch (SetInvalido e) 
-			{
-				System.out.println(e);
-				System.out.println("Tente novamente...");
-			}
-		}
-	}
-	
-	public void mostrarDados()
-	{
-		super.mostrarDados();
-		
-		String resposta = String.format(
-				"Endereço: %1s\n"
-				+ "Telefone: %2s\n"
-				+ "CTPS: %3s\n"
-				+ "Salário: R$%.2f\n", 
-				getEndereco(), getTelefone(), getCtps(), calcSalario());
-		
-		System.out.println(resposta);
-	}
-
 }

@@ -3,6 +3,7 @@ package com.pratica.dez.database;
 import java.util.ArrayList;
 
 import com.pratica.dez.model.classes.Funcionario;
+import com.pratica.dez.view.VisaoFuncionario;
 
 public class DadosFuncionarios {
 	
@@ -29,7 +30,7 @@ public class DadosFuncionarios {
 	{
 		for (Funcionario funcionario: funcionarios) 
 		{
-			funcionario.mostrarDados();
+			VisaoFuncionario.mostrarDados(funcionario);
 		}		
 	}
 	

@@ -3,6 +3,7 @@ package com.pratica.dez.database;
 import java.util.ArrayList;
 
 import com.pratica.dez.model.classes.Curso;
+import com.pratica.dez.view.VisaoCurso;
 
 public class DadosCursos {
 	
@@ -19,7 +20,7 @@ public class DadosCursos {
 	{
 		for (Curso curso: cursos) 
 		{
-			curso.mostrarDados();
+			VisaoCurso.mostrarDados(curso);
 		}		
 	}
 	

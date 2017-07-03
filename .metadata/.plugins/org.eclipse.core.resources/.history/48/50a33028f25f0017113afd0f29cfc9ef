@@ -1,0 +1,59 @@
+package com.pratica.dez.database;
+
+import java.util.ArrayList;
+
+import com.pratica.dez.model.classes.Aluno;
+
+public class DadosAlunos {
+	
+	private static ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+	
+	public static void cadastrar(Aluno a) 
+	{
+		alunos.add(a);
+		System.out.println(String.format(
+				"\nTotal de alunos inseridos: %1s", alunos.size()));
+	}
+	
+	public static void listar()
+	{
+		for (Aluno aluno: alunos) 
+		{
+			aluno.mostrarDados();
+		}		
+	}
+	
+	public static Aluno buscar(String matricula) 
+	{
+		for (Aluno aluno: alunos) 
+		{
+			if (aluno.getMatricula().equals(matricula))
+			{
+				return aluno;
+			}
+		}
+		return null;
+	}
+
+	public static boolean excluir(String matricula)
+	{
+		Aluno a = buscar(matricula);
+		if (a != null) 
+		{
+			alunos.remove(a);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static Aluno[] getAlunos()
+	{
+		if (alunos == null)
+		{
+			return null;
+		}
+		
+		return alunos.toArray(new Aluno[0]);
+	}
+}

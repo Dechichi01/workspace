@@ -1,0 +1,100 @@
+package com.pratica.dez.model.classes;
+
+import java.util.Scanner;
+
+import com.pratica.dez.view.VisaoDisciplina;
+import com.pratica.util.exceptions.SetInvalido;
+
+public class Disciplina {
+	
+	private int codigo;
+	private String nome;
+	private int carga_horaria;
+	private Curso curso;
+	private Professor professor;
+	
+	public Disciplina(Curso c)
+	{
+		VisaoDisciplina.lerDados(this);
+		try 
+		{
+			setCurso(c);
+		} 
+		catch (SetInvalido e) 
+		{
+			System.out.println(e);
+			System.out.println("Curso não atribuído");
+		}
+	}
+	
+	public Disciplina()
+	{
+		VisaoDisciplina.lerDados(this);
+		Curso c = new Curso();
+		c.lerDados();
+		try 
+		{
+			setCurso(c);
+		} 
+		catch (SetInvalido e) 
+		{
+			System.out.println(e);
+			System.out.println("Curso não atribuído");
+		}
+	}
+	
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo)  throws SetInvalido {
+		if (codigo < 0)
+			 throw new SetInvalido("Código da disciplina");
+		else
+			 this.codigo = codigo;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) throws SetInvalido {
+		if (nome.equals(""))
+			 throw new SetInvalido("Nome da disciplina");
+		else
+			 this.nome = nome;
+	}
+
+	public int getCarga_horaria() {
+		return carga_horaria;
+	}
+
+	public void setCarga_horaria(int carga_horaria) throws SetInvalido {
+		if (carga_horaria < 0)
+			 throw new SetInvalido("Carga horária");
+		else
+			 this.carga_horaria = carga_horaria;
+	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) throws SetInvalido {
+		if (curso == null)
+			 throw new SetInvalido("Curso");
+		else
+			 this.curso = curso;
+	}
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) throws SetInvalido  {
+		if (professor == null)
+			 throw new SetInvalido("Professor");
+		else
+			 this.professor = professor;
+	}
+}

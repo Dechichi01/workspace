@@ -1,0 +1,104 @@
+package com.pratica.dez.view;
+
+import java.util.Scanner;
+
+import com.pratica.dez.model.classes.AlunoPosGraduacao;
+import com.pratica.util.exceptions.SetInvalido;
+
+public abstract class VisaoAlunoPosGraduacao {
+	
+	public static void lerDados(AlunoPosGraduacao aPos)
+	{
+		VisaoAluno.lerDados(aPos);
+		
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("Digite a graduação do aluno de pós: ");
+		while (true)
+		{
+			try 
+			{
+				aPos.setGraduacao(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+		}
+		
+		System.out.println("Digite a instituicao de graduação: ");
+		while (true)
+		{
+			try 
+			{
+				aPos.setInstituicao(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+		}
+		
+		System.out.println("Digite a data de inicio de graduação (yyyy-mm-dd): ");
+		while (true)
+		{
+			try 
+			{
+				aPos.setInicioGraduacao(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+			catch (IllegalArgumentException e)
+			{
+				System.out.println("Data inválida. Tente novamente");
+			}
+		}
+		
+		System.out.println("Digite a data de término de graduação (yyyy-mm-dd): ");
+		while (true)
+		{
+			try 
+			{
+				aPos.setFimGraduacao(s.nextLine());
+				break;
+			} 
+			catch (SetInvalido e) 
+			{
+				System.out.println(e);
+				System.out.println("Tente novamente...");
+			}
+			catch (IllegalArgumentException e)
+			{
+				System.out.println("Data inválida. Tente novamente");
+			}
+		}
+	}
+	
+	public static void mostrarDados(AlunoPosGraduacao aPos)
+	{	
+		VisaoAluno.mostrarDados(aPos);
+		
+		String resposta = String.format(
+				"Graduado em: %1s\n"
+				+ "Instituição: %2s\n"
+				+ "Início Graduação: %3s\n"
+				+ "Término Graduação: %4s\n"
+				+ "\nCurso de Pós graduação:", 
+				aPos.getGraduacao(), aPos.getInstituicao(), aPos.getInicioGraduacao(), aPos.getFimGraduacao());
+		
+		System.out.println(resposta);
+		if (cursoPos != null)
+		{
+			VisaoCurso.mostrarDados(cursoPos);
+		}
+	}
+	
+}
