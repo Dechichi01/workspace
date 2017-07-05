@@ -1,0 +1,147 @@
+package com.pratica.dez;
+
+import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import com.pratica.dez.database.*;
+import com.pratica.dez.model.classes.Aluno;
+import com.pratica.dez.model.classes.AlunoPosGraduacao;
+import com.pratica.dez.model.classes.Curso;
+import com.pratica.dez.model.classes.Disciplina;
+import com.pratica.dez.model.classes.FolhaPagamento;
+import com.pratica.dez.model.classes.Funcionario;
+import com.pratica.dez.model.classes.Professor;
+import com.pratica.dez.model.classes.ProjetoPesquisa;
+import com.pratica.dez.model.classes.Tecnico;
+import com.pratica.dez.model.classes.Vigilante;
+import com.pratica.dez.model.interfaces.IPesquisador;
+import com.pratica.dez.view.VisaoAluno;
+import com.pratica.util.exceptions.SetInvalido;
+import com.pratica.util.persistence.Persist;
+
+public class Main {
+	
+	public static void main(String args[])
+	{	
+		try 
+		{
+			Funcionario.setPisoSalarial(1000);
+			Professor.setValorHoraAula(20);
+			Tecnico.setValorHoraExtra(10);
+		} 
+		catch (SetInvalido e) 
+		{
+			System.out.println(e.getMessage());
+			System.out.println("Não foi possível atribuir variáveis chave do programa. Encerrando...");
+			return;
+		}
+
+		Funcionario.setPercentBonificacao(.3);
+		
+		int option = -1;
+		while (true)
+		{
+			option = GetUserOption(0,8, "O que desejas fazer? Pressione: ", 
+					"1 - Listar Alunos, 2 - Listar Cursos, 3 - Listar Disciplinas 4 - Listar Funcionários",
+					"5 - Cadastrar Aluno, 6 - Cadastrar Curso, 7 - Cadastrar Disciplina, 8 - Cadastrar Funcionário",
+					"0 - Sair");
+			
+			switch(option)
+			{
+			case 0:
+				System.out.println("Encerrando programa.");
+				return;
+			case 1:
+				System.out.println("Alunos cadastrados: ");
+				DadosAlunos.listar();
+				break;
+			case 2:
+				System.out.println("Cursos cadastrados: ");
+				DadosCursos.listar();
+				break;
+			case 3:
+				System.out.println("Disciplinas cadastradas: ");
+				DadosDisciplinas.listar();
+				break;
+			case 4:
+				System.out.println("Funcinários cadastrados: ");
+				DadosFuncionarios.listar();
+				break;
+			case 5:
+				escolha = GetUserOption(0, 2,
+						"Pressione: ", "1 - Aluno, 2 - Aluno de Pós-Graduação, 0 - Sair");
+				
+				Aluno a = null;
+				switch(escolha)
+				{
+				case 1:
+					a = new Aluno();
+					break;
+				case 2:
+					a = new AlunoPosGraduacao();
+					break;
+				}
+				
+				if (escolha != 0 && a != null)
+					DadosAlunos.cadastrar(a);
+
+				break;
+			case 6:
+				Curso c = new Curso();
+				DadosCursos.cadastrar(c);
+				break;
+			case 7:
+				Disciplina d = new Disciplina();
+				DadosDisciplinas.cadastrar(d);
+				break;
+			case 8:
+				escolha = GetUserOption(0, 3, 
+						"Pressione: ", "1 - Funcionario, 2 - Tecnico, 3 - Vigilante, 0 - Sair");
+				
+				Funcionario f = null;
+
+				switch(escolha)
+				{
+				case 1:
+					f = new Professor();
+					break;
+				case 2:
+					f = new Tecnico();
+					break;
+				case 3:
+					f = new Vigilante();
+					break;
+				}
+				
+				if (escolha != 0 && f != null)
+					DadosFuncionarios.cadastrar(f);
+				
+				break;
+			}
+		}
+	}
+	
+	private static int GetUserOption(int min, int max, String... msgs)
+	{
+		for (String msg : msgs)
+		{
+			System.out.println(msg);
+		}
+		
+		Scanner s = new Scanner(System.in);
+		
+		int retVal= s.nextInt();
+		
+		while (retVal< min || retVal > max)
+		{
+			System.out.println("Por favor, insira um valor válido.");
+			retVal = s.nextInt();
+		}
+		
+		return retVal;
+	}
+
+}

@@ -1,12 +1,13 @@
 package com.pratica.dez.model.classes;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import com.pratica.dez.view.VisaoCurso;
 import com.pratica.dez.view.VisaoDisciplina;
 import com.pratica.util.exceptions.SetInvalido;
 
-public class Disciplina {
+public class Disciplina implements Serializable {
 	
 	private int codigo;
 	private String nome;
@@ -14,7 +15,7 @@ public class Disciplina {
 	private Curso curso;
 	private Professor professor;
 	
-	public Disciplina(Curso c)
+	public Disciplina(Curso c, Professor p)
 	{
 		VisaoDisciplina.lerDados(this);
 		try 
@@ -26,13 +27,21 @@ public class Disciplina {
 			System.out.println(e);
 			System.out.println("Curso não atribuído");
 		}
+		try
+		{
+			setProfessor(p);
+		}
+		catch (SetInvalido e)
+		{
+			System.out.println(e);
+			System.out.println("Professor não atribuido");
+		}
 	}
 	
 	public Disciplina()
 	{
 		VisaoDisciplina.lerDados(this);
 		Curso c = new Curso();
-		VisaoCurso.lerDados(c);
 		try 
 		{
 			setCurso(c);
@@ -41,6 +50,17 @@ public class Disciplina {
 		{
 			System.out.println(e);
 			System.out.println("Curso não atribuído");
+		}
+		
+		Professor p = new Professor();
+		try
+		{
+			setProfessor(p);
+		}
+		catch (SetInvalido e)
+		{
+			System.out.println(e);
+			System.out.println("Professor não atribuido");
 		}
 	}
 	

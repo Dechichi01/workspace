@@ -1,5 +1,6 @@
 package com.pratica.util.persistence;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -8,11 +9,16 @@ import java.io.Serializable;
 
 public abstract class Persist {
 	
-	public static <T extends Serializable> boolean gravar(T a, String arquivo)
-	{
+	public static <T extends Serializable> boolean gravar(T a, String arquivo ){
 		try
 		{
-			 FileOutputStream arquivoGrav = new FileOutputStream(arquivo);
+			File file = new File(arquivo);
+			if (!file.exists())
+			{
+				file.createNewFile();
+			}
+			
+			 FileOutputStream arquivoGrav = new FileOutputStream(file);
 
 			 ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
 
@@ -25,29 +31,31 @@ public abstract class Persist {
 		}
 		catch(Exception e)
 		{
-			System.out.println("ERRO: Falha ao gravar o objeto do tipo: " + a.getClass().getTypeName());
-			return false;
+			System.out.println("Erro: Não consegui salvar");
+			 return false;
 		}
 	}
-		 
-	public static <T extends Serializable> T recuperar(String arquivo)
-	{
+	
+	 public static <T extends Serializable> T recuperar(String arquivo)
+	 {
 		 T obj = null;
 		 FileInputStream arquivoLeitura = null;
 		 ObjectInputStream objLeitura = null;
 		 try
 		 {
+
 			 arquivoLeitura = new FileInputStream(arquivo);
+
 			 objLeitura = new ObjectInputStream(arquivoLeitura);
-			 obj =(T) objLeitura.readObject();
+
+			 obj = (T) objLeitura.readObject();
 			 objLeitura.close();
 			 arquivoLeitura.close(); 
 		 }
-		 catch( Exception e )
+		 catch(Exception e )
 		 {
 			 return null;
 		 }
-		 
 		 return obj;
-	} 
+	 }
 }

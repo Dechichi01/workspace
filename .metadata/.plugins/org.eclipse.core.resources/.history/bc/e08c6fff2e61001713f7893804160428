@@ -1,0 +1,56 @@
+package com.pratica.dez;
+
+import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import com.pratica.dez.database.*;
+import com.pratica.dez.model.classes.Aluno;
+import com.pratica.dez.model.classes.AlunoPosGraduacao;
+import com.pratica.dez.model.classes.Curso;
+import com.pratica.dez.model.classes.Disciplina;
+import com.pratica.dez.model.classes.FolhaPagamento;
+import com.pratica.dez.model.classes.Funcionario;
+import com.pratica.dez.model.classes.Professor;
+import com.pratica.dez.model.classes.ProjetoPesquisa;
+import com.pratica.dez.model.classes.Tecnico;
+import com.pratica.dez.model.classes.Vigilante;
+import com.pratica.dez.model.interfaces.IPesquisador;
+import com.pratica.dez.view.VisaoAluno;
+import com.pratica.util.exceptions.SetInvalido;
+import com.pratica.util.persistence.Persist;
+
+public class Main {
+	
+	public static void main(String args[])
+	{	
+		try 
+		{
+			Funcionario.setPisoSalarial(1000);
+			Professor.setValorHoraAula(20);
+			Tecnico.setValorHoraExtra(10);
+		} 
+		catch (SetInvalido e) 
+		{
+			System.out.println(e.getMessage());
+			System.out.println("Não foi possível atribuir variáveis chave do programa. Encerrando...");
+			return;
+		}
+
+		Funcionario.setPercentBonificacao(.3);
+		
+		System.out.println("Alunos já cadastrados: " + DadosAlunos.getAlunos().length);
+		DadosAlunos.listar();
+		
+		System.out.println("Cursos já cadastrados: " + DadosCursos..length);
+		DadosAlunos.listar();
+		
+		System.out.println("Alunos já cadastrados: " + DadosAlunos.getAlunos().length);
+		DadosAlunos.listar();
+		
+		System.out.println("Alunos já cadastrados: " + DadosAlunos.getAlunos().length);
+		DadosAlunos.listar();
+	}
+}

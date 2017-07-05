@@ -1,9 +1,12 @@
 package com.pratica.dez.model.classes;
 
+import java.io.Serializable;
+
 import com.pratica.dez.model.interfaces.IPesquisador;
+import com.pratica.dez.view.VisaoAluno;
 import com.pratica.util.exceptions.SetInvalido;
 
-public class Aluno extends Pessoa implements IPesquisador{
+public class Aluno extends Pessoa implements IPesquisador {
 	
 	private String matricula;
 	private Curso curso;
@@ -11,7 +14,7 @@ public class Aluno extends Pessoa implements IPesquisador{
 	
 	public Aluno(Curso c)
 	{
-		super();
+		VisaoAluno.lerDados(this);
 		try 
 		{
 			setCurso(c);
@@ -25,7 +28,7 @@ public class Aluno extends Pessoa implements IPesquisador{
 	
 	public Aluno()
 	{
-		super();
+		VisaoAluno.lerDados(this);
 		Curso c = new Curso();
 		try 
 		{

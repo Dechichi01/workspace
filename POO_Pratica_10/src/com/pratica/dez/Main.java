@@ -18,13 +18,14 @@ import com.pratica.dez.model.classes.ProjetoPesquisa;
 import com.pratica.dez.model.classes.Tecnico;
 import com.pratica.dez.model.classes.Vigilante;
 import com.pratica.dez.model.interfaces.IPesquisador;
+import com.pratica.dez.view.VisaoAluno;
 import com.pratica.util.exceptions.SetInvalido;
+import com.pratica.util.persistence.Persist;
 
 public class Main {
 	
 	public static void main(String args[])
 	{	
-		
 		try 
 		{
 			Funcionario.setPisoSalarial(1000);
@@ -40,36 +41,114 @@ public class Main {
 
 		Funcionario.setPercentBonificacao(.3);
 		
-		DadosAlunos.listar();
-		for (int i = 1; i< 2; i++)
+		int option = -1;
+		int escolha = - 1;
+		while (true)
 		{
-			System.out.printf("##### Professor %d: \n", i);
-			Professor p = new Professor();
-			System.out.printf("##### Aluno %d: \n", i);
-			Aluno a = new Aluno();
+			escolha = -1;
+			option = GetUserOption(0,8, "O que desejas fazer? Pressione: ", 
+					"1 - Listar Alunos, 2 - Listar Cursos, 3 - Listar Disciplinas 4 - Listar Funcionários",
+					"5 - Cadastrar Aluno, 6 - Cadastrar Curso, 7 - Cadastrar Disciplina, 8 - Cadastrar Funcionário",
+					"0 - Sair");
 			
-			DadosFuncionarios.cadastrar(p);
-			DadosAlunos.cadastrar(a);
-		}
-		
-		Funcionario[] funcionarios = DadosFuncionarios.getFuncionarios();
-		Aluno[] alunos = DadosAlunos.getAlunos();	
-		
-		try 
-		{
-			ProjetoPesquisa proj = new ProjetoPesquisa(1000,"Projeto Teste", 
-					Date.valueOf(LocalDateTime.now().toLocalDate()), (Professor)funcionarios[0], alunos);
-			
-			for (Funcionario prof : funcionarios)
+			switch(option)
 			{
-				proj.adicionaPesquisador((IPesquisador) prof);
+			case 0:
+				System.out.println("##### Programa finalizado #####.");
+				return;
+			case 1:
+				System.out.println("Alunos cadastrados: ");
+				DadosAlunos.listar();
+				break;
+			case 2:
+				System.out.println("Cursos cadastrados: ");
+				DadosCursos.listar();
+				break;
+			case 3:
+				System.out.println("Disciplinas cadastradas: ");
+				DadosDisciplinas.listar();
+				break;
+			case 4:
+				System.out.println("Funcinários cadastrados: ");
+				DadosFuncionarios.listar();
+				break;
+			case 5:
+				escolha = GetUserOption(0, 2,
+						"Pressione: ", "1 - Aluno, 2 - Aluno de Pós-Graduação, 0 - Sair");
+				
+				Aluno a = null;
+				switch(escolha)
+				{
+				case 1:
+					a = new Aluno();
+					break;
+				case 2:
+					a = new AlunoPosGraduacao();
+					DadosCursos.cadastrar(((AlunoPosGraduacao)a).getCursoPos());
+					break;
+				}
+				
+				if (escolha != 0 && a != null)
+				{
+					DadosAlunos.cadastrar(a);
+					DadosCursos.cadastrar(a.getCurso());
+				}
+
+				break;
+			case 6:
+				Curso c = new Curso();
+				DadosCursos.cadastrar(c);
+				break;
+			case 7:
+				Disciplina d = new Disciplina();
+				DadosDisciplinas.cadastrar(d);
+				DadosCursos.cadastrar(d.getCurso());
+				break;
+			case 8:
+				escolha = GetUserOption(0, 3, 
+						"Pressione: ", "1 - Funcionario, 2 - Tecnico, 3 - Vigilante, 0 - Sair");
+				
+				Funcionario f = null;
+
+				switch(escolha)
+				{
+				case 1:
+					f = new Professor();
+					break;
+				case 2:
+					f = new Tecnico();
+					break;
+				case 3:
+					f = new Vigilante();
+					break;
+				}
+				
+				if (escolha != 0 && f != null)
+					DadosFuncionarios.cadastrar(f);
+				
+				break;
 			}
-			
-			proj.listaPesquisadores();
-		} 
-		catch (SetInvalido e) 
-		{
-			e.printStackTrace();
 		}
 	}
+	
+	private static int GetUserOption(int min, int max, String... msgs)
+	{
+		for (String msg : msgs)
+		{
+			System.out.println(msg);
+		}
+		
+		Scanner s = new Scanner(System.in);
+		
+		int retVal= s.nextInt();
+		
+		while (retVal< min || retVal > max)
+		{
+			System.out.println("Por favor, insira um valor válido.");
+			retVal = s.nextInt();
+		}
+		
+		return retVal;
+	}
+
 }

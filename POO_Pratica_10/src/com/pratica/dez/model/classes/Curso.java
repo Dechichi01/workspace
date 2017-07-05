@@ -1,11 +1,12 @@
 package com.pratica.dez.model.classes;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import com.pratica.dez.view.VisaoCurso;
 import com.pratica.util.exceptions.SetInvalido;
 
-public class Curso {
+public class Curso implements Serializable {
 	
 	private int codigo;
 	private String nome;
